@@ -1,0 +1,17 @@
+<div class="async">
+  <p class="welcome">Hello from the Async Component</p>
+
+  <p>Data from service:</p>
+  <ul>
+    <li class="some-service-event-data">{{someServiceEventData}}</li>
+    <li class="some-service-event-data-better">{{someServiceEventDataBetter}}</li>
+  </ul>
+
+  {{#if showButton}}
+    <button {{action "loadData"}}>Do something async</button>
+  {{else if message}}
+    <span class="message">{{message}}</span>
+  {{else}}
+    <span class="loading">Loading...</span>
+  {{/if}}
+</div>
