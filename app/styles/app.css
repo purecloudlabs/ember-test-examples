@@ -1,0 +1,21 @@
+* {
+  font-family: sans-serif;
+}
+
+body {
+  background-color: #3c3c3c;
+  color: #c1c1c1;
+}
+
+button {
+  padding: 5px;
+  background-color: offwhite;
+  border-radius: 3px;
+  border: none;
+  margin: 10px;
+}
+
+a, a:visited, a:hover {
+  color: white;
+  padding: 4px;
+}

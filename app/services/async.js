@@ -105,7 +105,7 @@ export default Ember.Service.extend(Ember.Evented, {
       // even if handleCPUpdate fires immediately
       const deferred = Ember.RSVP.defer();
       this.set('cpUpdateDeferred', deferred);
-      Ember.run.later(function () {
+      setTimeout(function () {
         deferred.reject(new Error('async operation timeout'));
       }, 2000);
 

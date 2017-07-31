@@ -11,7 +11,7 @@ moduleForComponent('async-ui', 'Integration | Component | async ui', {
 
 // This test is expected to fail, because it's bad
 // This is a tricky thing to test - that service events are triggering changes to the display data
-test('it updates the display value of server data coming in on events (expected to fail)', function(assert) {
+test('it updates the display value of server data coming in on events (expected to fail unless using run.bind)', function(assert) {
   const done = assert.async();
 
   this.render(hbs`{{async-ui}}`);
@@ -27,7 +27,9 @@ test('it updates the display value of server data coming in on events (expected 
   }, 3500);
 
   // this test fails because we don't have control over the interval that fires events
-  // meaning that this runs outside of our ember runloop, and the tests throw
+  // meaning that this runs outside of our ember runloop, and the tests throw.
+  // changing our bindings to `async.on('someServiceEventBetter', Ember.bind.run(this, this.handleServiceEventBetter))`
+  // makes the test pass
 });
 
 test('it updates the display value of server data coming in on events', function (assert) {
@@ -66,7 +68,9 @@ test('it does some async stuff with a button', function (assert) {
   Ember.run(() => {
     defer.reject();
   });
+  assert.equal(this.$('.message').length, 1, 'the error message was shown');
   return wait().then(() => {
-    assert.equal(this.$('.message').length, 1, 'the error message was shown');
-  });
+    assert.equal(this.$('.message').length, 0, 'the error message was hidden');
+    assert.equal(this.$('button').length, 1, 'the button was shown');
+  })
 });
